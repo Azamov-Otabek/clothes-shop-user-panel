@@ -2,10 +2,13 @@ import { Container } from "@components"
 import { PicCenterOutlined, UserOutlined, HeartOutlined, ShoppingCartOutlined} from '@ant-design/icons';
 import { Button, Input } from 'antd';
 import { NavLink } from "react-router-dom";
+import { useState } from "react";
+import { getCookies } from "@cookie";
 
 
 function index() {
   const { Search } = Input;
+  const [user] = useState(getCookies('first_name') || '')
   return (
     <header className='py-[20px] shadow-lg fixed top-0 w-full'>
       <Container>
@@ -17,9 +20,21 @@ function index() {
                 </Button>
                 <Search className="h-[40px]" placeholder="input search text" enterButton="Search" size="large"/>
                 <NavLink to={'/login'}>
-                  <Button className="h-[40px] font-semibold text-[16px]" type="text" icon={<UserOutlined />} iconPosition={'start'}>
-                    Войти
-                  </Button>
+                  {
+                      user? (
+                        <NavLink to={'/'}>
+                          <Button className="h-[40px] font-semibold text-[16px]" type="text" icon={<UserOutlined />} iconPosition={'start'}>
+                            {user}
+                          </Button>
+                        </NavLink>
+                      ) : (
+                        <NavLink to={'/login'}>
+                          <Button className="h-[40px] font-semibold text-[16px]" type="text" icon={<UserOutlined />} iconPosition={'start'}>
+                            Войти
+                          </Button>
+                        </NavLink>
+                      )
+                  }
                 </NavLink>
                 <Button className="h-[40px] font-semibold text-[16px]" type="text" icon={<HeartOutlined />} iconPosition={'start'}>
                   Избранное

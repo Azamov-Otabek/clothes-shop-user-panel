@@ -3,8 +3,10 @@ import type { FormProps } from 'antd';
 import { Button, Checkbox, Form, Input} from 'antd';
 import { Container } from '@components';
 import { EyeInvisibleOutlined, EyeTwoTone, GithubOutlined, GoogleOutlined, FacebookOutlined } from '@ant-design/icons';
-import { NavLink } from 'react-router-dom';
-
+import { NavLink, useNavigate } from 'react-router-dom'
+import { Auth } from '@store';
+import { useStore } from 'zustand';
+import { ToastContainer, toast } from 'react-toastify';
 
 type FieldType = {
   email?: string;
@@ -12,23 +14,42 @@ type FieldType = {
   remember?: string;
 };
 
-const onFinish: FormProps<FieldType>['onFinish'] = (values) => {
-  console.log('Success:', values);
-};
-
-const onFinishFailed: FormProps<FieldType>['onFinishFailed'] = (errorInfo) => {
-  console.log('Failed:', errorInfo);
-};
-
 const index: React.FC = () => {
   const [load, isload] = useState(false)
+  const {Login} = useStore(Auth)
+  const navigate = useNavigate()
+  
+  const onFinish: FormProps<FieldType>['onFinish'] = async (values) => {
+    isload(true)
+    const payload = {
+      email: values.email,
+      password:  values.password,
+    }
+    const response = await Login(payload)
+    if(response.status == 200){
+      toast.success('Hush kelibsiz', {autoClose: 800})
+      setTimeout(() => {
+        navigate('/')
+      }, 1200);
+    } else if(response.response.status == 404){
+      toast.error('Email yoki parol noto\'g\'ri', {autoClose: 800})
+      setTimeout(() => {
+        isload(false)
+      }, 1000);
+    }
+  };
+
+  
+  
+  
   return (
-    <Container>
+    <>
+    <ToastContainer />
+       <Container>
     <div className='w-[500px] mx-auto mt-[200px] border p-[40px] rounded-lg shadow-lg'>
        <Form
          initialValues={{ remember: true }}
          onFinish={onFinish}
-         onFinishFailed={onFinishFailed}
          autoComplete="off">
            
          <p className='text-[18px] text-[#00000054] cursor-default'>Email</p>
@@ -74,6 +95,7 @@ const index: React.FC = () => {
        </div>
     </div>
  </Container>
+    </>
   )
 }
 

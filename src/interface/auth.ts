@@ -3,8 +3,8 @@ export interface ForgotPassword {
 }
 
 export interface Login{
-    email: string,
-    password: string,
+    email: string | undefined,
+    password: string | undefined,
 }
 
 export interface Register{
@@ -33,7 +33,7 @@ export interface VerifyCode{
 
 
 export interface Request{
-    Login: (data:Login) => any,
+    Login: (payload:Login) => any,
     Register: (data:Register) => any,
     ForgotPassword: (data:ForgotPassword) => any,
     ResetPassword: (data:ResetPassword) => any,

@@ -6,11 +6,17 @@ import { setCookies } from "@cookie";
 
 const useAuthStore = create <Request> (() => ({
     Login: async (payload) => {
-        const response = await http.post('/login', payload)
-        if(response.status === 200)
-            setCookies('token', response.data.access_token)
-            setCookies('refresh_token', response.data.refresh_token)
-        return response
+        try{
+            const response = await http.post('/login', payload)
+            if(response.status === 200){
+                setCookies('token', response.data.access_token)
+                setCookies('refresh_token', response.data.refresh_token)
+                setCookies('first_name', response.data.first_name)
+            }
+            return response
+        }catch(err){
+            return err
+        }
     },
     Register: async (payload) => {
         const response = await http.post('/register', payload)
