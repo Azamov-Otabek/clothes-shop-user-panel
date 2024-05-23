@@ -36,6 +36,11 @@ const index: React.FC = () => {
   
   return (
     <>
+    <NavLink to={'/'}>
+        <Button className=' absolute left-[200px] top-[100px]'>
+            Ortga qaytish
+        </Button>
+      </NavLink>
     <ModalRegister active={isactive} setactive={setisactive} email={email} />
     <ToastContainer />
        <Container>

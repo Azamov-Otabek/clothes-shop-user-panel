@@ -1,6 +1,6 @@
 import {children} from '@globalinterface'
 
-function index({children}:children) {
+function Index({children}:children) {
   return (
     <div className=' max-w-[1200px] mx-auto'>
         {children}
@@ -8,4 +8,4 @@ function index({children}:children) {
   )
 }
 
-export default index
+export default Index
