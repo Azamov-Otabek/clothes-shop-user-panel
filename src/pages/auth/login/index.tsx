@@ -46,7 +46,7 @@ const index: React.FC = () => {
     <>
     <ToastContainer />
        <Container>
-    <div className='w-[500px] mx-auto mt-[200px] border p-[40px] rounded-lg shadow-lg'>
+    <div className='max-w-[500px] mx-auto mt-[200px] border p-[40px] rounded-lg shadow-lg'>
        <Form
          initialValues={{ remember: true }}
          onFinish={onFinish}

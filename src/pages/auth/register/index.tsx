@@ -1,41 +1,33 @@
 import React, { useState } from 'react';
 import type { FormProps } from 'antd';
-import { Button, Checkbox, Form, Input} from 'antd';
+import { Button, Select, Form, Input} from 'antd';
 import { Container } from '@components';
 import { EyeInvisibleOutlined, EyeTwoTone, GithubOutlined, GoogleOutlined, FacebookOutlined } from '@ant-design/icons';
-import { NavLink, useNavigate } from 'react-router-dom'
+import { NavLink} from 'react-router-dom'
 import { Auth } from '@store';
 import { useStore } from 'zustand';
 import { ToastContainer, toast } from 'react-toastify';
-
-type FieldType = {
-  email?: string;
-  password?: string;
-  remember?: string;
-};
+import { Register } from '../../../interface/auth';
+import { PasswordValidation } from '../../../utils/register-validate';
+import { ModalRegister } from '@ui';
 
 const index: React.FC = () => {
   const [load, isload] = useState(false)
-  const {Login} = useStore(Auth)
-  const navigate = useNavigate()
+  const {Register} = useStore(Auth)
+  const { Option } = Select;
+  const [isactive, setisactive] = useState(false)
+  const [email, setemail]:[string, any] = useState('')
   
-  const onFinish: FormProps<FieldType>['onFinish'] = async (values) => {
+  const onFinish: FormProps<Register>['onFinish'] = async (values) => {
+    setemail(values.email)
     isload(true)
-    const payload = {
-      email: values.email,
-      password:  values.password,
-    }
-    const response = await Login(payload)
-    if(response.status == 200){
-      toast.success('Hush kelibsiz', {autoClose: 800})
-      setTimeout(() => {
-        navigate('/')
-      }, 1200);
-    } else if(response.response.status == 404){
-      toast.error('Email yoki parol noto\'g\'ri', {autoClose: 800})
-      setTimeout(() => {
+    const response = await Register(values)
+    if(response.status == 201){
         isload(false)
-      }, 1000);
+        setisactive(true)
+    }else if(response.response.status != 201){
+        isload(false)
+        toast.error('Xatolik mavjud')
     }
   };
 
@@ -44,14 +36,28 @@ const index: React.FC = () => {
   
   return (
     <>
+    <ModalRegister active={isactive} setactive={setisactive} email={email} />
     <ToastContainer />
        <Container>
-    <div className='w-[500px] mx-auto mt-[200px] border p-[40px] rounded-lg shadow-lg'>
+    <div className='max-w-[500px] mx-auto mt-[100px] border p-[40px] rounded-lg shadow-lg'>
        <Form
          initialValues={{ remember: true }}
          onFinish={onFinish}
          autoComplete="off">
-           
+          <p className='text-[18px] text-[#00000054] cursor-default'>Ismingiz</p>
+         <Form.Item
+           name="first_name"
+           rules={[{ required: true, message: 'Iltimos ismingizni kiriting!' }]}
+           >
+           <Input className='text-[18px] font-medium py-[3px]'/>
+         </Form.Item>
+         <p className='text-[18px] text-[#00000054] cursor-default'>Familyangiz</p>
+         <Form.Item
+           name="last_name"
+           rules={[{ required: true, message: 'Iltimos familyangizni kiriting!' }]}
+           >
+           <Input className='text-[18px] font-medium py-[3px]'/>
+         </Form.Item>          
          <p className='text-[18px] text-[#00000054] cursor-default'>Email</p>
          <Form.Item
            name="email"
@@ -62,28 +68,38 @@ const index: React.FC = () => {
           <p className='text-[18px] text-[#00000054] cursor-default' >Password</p>
           <Form.Item
           name='password'
-          rules={[{ required: true, message: "Iltimos parolingizni kiriting!"}]}
+          rules={PasswordValidation}
           >
             <Input.Password className='text-[18px] font-medium py-[3px]' iconRender={(visible) => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}/>
           </Form.Item>
+          <Form.Item name="gender" rules={[{ required: true, message: "Jinsingizni kiriting!" }]}>
+            <Select
+              placeholder="Jinsingizni kiriting"
+              allowClear
+            >
+              <Option value="male">Erkak</Option>
+              <Option value="female">Ayol</Option>
+              <Option value="other">Boshqa</Option>
+            </Select>
+          </Form.Item>
 
-          <div className='flex justify-between items-center'>
-            <Form.Item name='remember' valuePropName='checked' noStyle>
-              <Checkbox>Eslab qolish</Checkbox>
-            </Form.Item>
-            <NavLink to={'/register'}>
-              <p className='text-[16px] text-[#2C87FF]'>Parolni unutdingizmi?</p>
-            </NavLink>
-          </div>
+         
 
           <Form.Item>
             <Button type='primary' htmlType='submit' loading={load} className='w-full h-[40px] mt-[20px] bg-[#2C87FF] text-[#FFFFFF] rounded-lg'>
-              Kirish
+              Register
             </Button>
           </Form.Item>
        </Form>
-       <NavLink to={'/register'}>
-         <p className='text-[15px] text-center text-[#2C87FF]'>Yangi akkaunt ochish</p>
+
+
+
+
+
+
+
+       <NavLink to={'/login'}>
+         <p className='text-[15px] text-center text-[#2C87FF]'>Akkauntingiz bormi ?</p>
        </NavLink>
        <br/>
        <hr/>

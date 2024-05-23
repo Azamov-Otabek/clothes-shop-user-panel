@@ -19,8 +19,12 @@ const useAuthStore = create <Request> (() => ({
         }
     },
     Register: async (payload) => {
-        const response = await http.post('/register', payload)
-        return response
+        try{
+            const response = await http.post('/register', payload)
+            return response
+        }catch(err){
+            return err
+        }
     },
     ForgotPassword: async (payload) => {
         const response = await http.post(`/forgot/${payload.email}`)
@@ -35,8 +39,12 @@ const useAuthStore = create <Request> (() => ({
         return response
     },
     VerifyCode: async (payload) => {
+       try{
         const response = await http.post(`/verify?email=${payload.email}&otp=${payload.otp}`)
         return response
+       }catch(err){
+        return err
+       }
     }
 }))
 

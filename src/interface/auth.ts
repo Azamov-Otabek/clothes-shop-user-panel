@@ -8,11 +8,11 @@ export interface Login{
 }
 
 export interface Register{
-    email: string,
-    password: string,
-    first_name: string,
-    gender: string
-    last_name: string
+    email: string | undefined,
+    password:  string | undefined,
+    first_name:  string | undefined,
+    gender:  string | undefined,
+    last_name:  string | undefined,
 }
 
 export interface ResetPassword{
