@@ -23,8 +23,6 @@ async function getRefreshToken(){
 }
 
 
-
-
 http.interceptors.request.use((config) => {
     const token = getCookies("token")
     if (token) {

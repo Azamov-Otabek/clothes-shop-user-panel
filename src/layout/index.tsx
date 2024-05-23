@@ -1,6 +1,10 @@
+import {Header } from "@components"
+
 function index() {
   return (
-    <div>index</div>
+    <div>
+          <Header/>
+    </div>
   )
 }
 

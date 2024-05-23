@@ -17,6 +17,7 @@
       "@router": ["./src/router"],
       "@config": ["./src/config"],
       "@cookie": ["./src/utils/cookies"],
+      "@globalinterface": ["./src/interface/global"],
     },
 
     /* Bundler mode */

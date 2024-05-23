@@ -16,6 +16,7 @@ export default defineConfig({
       { find: "@utils", replacement: '/src/utils'},
       { find: "@ui", replacement: '/src/components/ui'},
       { find: "@cookie", replacement: '/src/utils/cookies'},
+      { find: "@globalinterface", replacement: '/src/interfaces/global'}
     ]
   }
 })
