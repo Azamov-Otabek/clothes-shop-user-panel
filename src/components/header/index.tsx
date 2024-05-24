@@ -16,11 +16,11 @@ function index() {
 
   const items: MenuProps['items'] = [
     {
-      label: <a href="https://www.antgroup.com">1st menu item</a>,
+      label: '1st menu item',
       key: '0',
     },
     {
-      label: <a href="https://www.aliyun.com">2nd menu item</a>,
+      label: '2nd menu item',
       key: '1',
     },
     {
@@ -40,21 +40,19 @@ function index() {
               <img className="w-[200px] h-[50px] object-cover" src="https://bevingrosso.it/wp-content/uploads/2020/12/logo-astoria.png" alt="" />
               <div className="flex items-center justify-between w-full gap-[20px]">  
                 <Button className="h-[40px]" icon={<PicCenterOutlined />} iconPosition={'start'}>
-                  Search
+                  Категория
                 </Button>
-                <Search className="h-[40px]" placeholder="input search text" enterButton="Search" size="large"/>
+                <Search className="h-[40px]" placeholder="Напишите что вы искаете ?" enterButton="Search" size="large"/>
                 <NavLink to={'/login'}>
                   {
                       user? (            
-                        <Dropdown menu={{ items }} trigger={['click']}>
-                        <a onClick={(e) => e.preventDefault()}>
-                          <Space>
+                        <Dropdown menu={{ items }} trigger={['click']}>        
+                          <Space onClick={(e) => e.preventDefault()}>
                             <Button className="h-[40px] font-semibold text-[16px]" type="text" icon={<UserOutlined />} iconPosition={'start'}>
                               {user}
                             </Button>
                            
                           </Space>
-                        </a>
                         </Dropdown>
                       ) : (
                         <NavLink to={'/login'}>

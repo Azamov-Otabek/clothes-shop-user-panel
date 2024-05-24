@@ -12,6 +12,7 @@ export interface data{
     age_min: number | undefined;
     age_max: number | undefined;
     for_gender: string | undefined;
+    image_url: string | undefined;
 }
 
 export interface getCard{

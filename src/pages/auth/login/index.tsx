@@ -7,6 +7,9 @@ import { NavLink, useNavigate } from 'react-router-dom'
 import { Auth } from '@store';
 import { useStore } from 'zustand';
 import { ToastContainer, toast } from 'react-toastify';
+import { GoogleLogin } from '@react-oauth/google';
+
+
 
 type FieldType = {
   email?: string;
@@ -26,10 +29,11 @@ const index: React.FC = () => {
       password:  values.password,
     }
     const response = await Login(payload)
+    console.log(response);
     if(response.status == 200){
       toast.success('Hush kelibsiz', {autoClose: 800})
       setTimeout(() => {
-        navigate('/')
+        navigate('/') 
       }, 1200);
     } else if(response.response.status == 404){
       toast.error('Email yoki parol noto\'g\'ri', {autoClose: 800})
@@ -37,7 +41,7 @@ const index: React.FC = () => {
         isload(false)
       }, 1000);
     }
-  };
+  };  
 
   
   
@@ -100,6 +104,14 @@ const index: React.FC = () => {
        </div>
     </div>
  </Container>
+ <GoogleLogin
+    onSuccess={credentialResponse => {
+    console.log(credentialResponse);
+  }}
+  onError={() => {
+    console.log('Login Failed');
+  }}
+/>;
     </>
   )
 }

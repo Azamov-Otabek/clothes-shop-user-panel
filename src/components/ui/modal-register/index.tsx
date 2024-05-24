@@ -58,7 +58,7 @@ const App = (props:any) => {
     <>
       <Modal className='mt-[180px]' title="Email pochtangizni tasdiqlash kodi yuborildi. " open={props.active} onOk={handleOk} onCancel={handleCancel} footer={false}>
       <Title level={5}>8 raqamdan iborat son yuborildi</Title>
-      <Input.OTP length={8} {...sharedProps} />
+      <Input.OTP length={6} {...sharedProps} />
       </Modal>
     </>
   );

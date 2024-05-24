@@ -22,7 +22,7 @@ const index: React.FC = () => {
     setemail(values.email)
     isload(true)
     const response = await Register(values)
-    if(response.status == 201){
+    if(response.status == 200){
         isload(false)
         setisactive(true)
     }else if(response.response.status != 201){
