@@ -3,7 +3,6 @@ import { Carusel, Card } from "@ui"
 import { Products } from "@store"
 import { useStore } from "zustand"
 import { useEffect } from "react"
-import { Outlet } from "react-router-dom"
 
 function Index() {
   const { products, getProducts } = useStore(Products)

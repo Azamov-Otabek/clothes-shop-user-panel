@@ -9,7 +9,7 @@ import { Tooltip } from "antd";
 
 function index() {
   const { getProductbyId, getProductPhoto } = useStore(useProductStore);
-  const [arrow, setArrow] = useState('Show');
+  const [arrow] = useState('Show');
   const [data, setData]:any = useState([] || {});
   const [img, setImg] = useState([]);
   const [count, setCount] = useState(1);
