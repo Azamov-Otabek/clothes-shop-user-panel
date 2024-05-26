@@ -7,7 +7,7 @@ import { getCookies, removeCookies } from "@cookie";
 import type { MenuProps} from 'antd';
 import { Dropdown, Space } from 'antd';
 
-function index() {
+function Index() {
   function logout(){
     removeCookies('token')
     removeCookies('first_name')
@@ -37,7 +37,9 @@ function index() {
     <header className='py-[20px] shadow-lg fixed top-0 w-full z-50 bg-white'>
       <Container>
          <nav className="flex items-center justify-between gap-9">
+              <NavLink to={'/'}>
               <img className="w-[200px] h-[50px] object-cover" src="https://bevingrosso.it/wp-content/uploads/2020/12/logo-astoria.png" alt="" />
+              </NavLink>
               <div className="flex items-center justify-between w-full gap-[20px]">  
                 <Button className="h-[40px]" icon={<PicCenterOutlined />} iconPosition={'start'}>
                   Категория
@@ -45,7 +47,7 @@ function index() {
                 <Search className="h-[40px]" placeholder="Напишите что вы искаете ?" enterButton="Search" size="large"/>
                 <NavLink to={'/login'}>
                   {
-                      user? (            
+                      user != ''? (            
                         <Dropdown menu={{ items }} trigger={['click']}>        
                           <Space onClick={(e) => e.preventDefault()}>
                             <Button className="h-[40px] font-semibold text-[16px]" type="text" icon={<UserOutlined />} iconPosition={'start'}>
@@ -76,4 +78,4 @@ function index() {
   )
 }
 
-export default index
+export default Index

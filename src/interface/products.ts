@@ -26,7 +26,17 @@ export interface Page{
     name?: string | undefined;
 }
 
+export interface ProductId{
+    id: string | null;
+}
+
+export interface ProductPhoto{
+    id: string | null;
+}
+
 export interface Request{
     products: data[]
     getProducts: (payload: Page) => Promise<any>;
+    getProductbyId: (payload: ProductId) => Promise<any>;
+    getProductPhoto: (payload: ProductPhoto) => Promise<any>;
 }
