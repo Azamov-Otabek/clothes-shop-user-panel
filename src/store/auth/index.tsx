@@ -45,6 +45,16 @@ const useAuthStore = create <Request> (() => ({
        }catch(err){
         return err
        }
+    },
+    createUser: async (payload) => {
+        try{
+            const response = await http.post(`/user`, payload)
+            if(response.status == 201){
+                return response
+            }
+        }catch(err){
+            return err
+        }
     }
 }))
 

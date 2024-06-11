@@ -59,7 +59,7 @@ function index() {
       <div className="mt-[120px] mb-[400px]">
         <Container>
           <div className="flex justify-between">
-            <div className="w-[500px] rounded-md overflow-hidden">
+            <div className="w-[500px] rounded-md overflow-hidden ">
               <ImageGallery
                 autoPlay={true}
                 infinite={true}
@@ -67,6 +67,7 @@ function index() {
                 showPlayButton={false}
                 showFullscreenButton={false}
                 items={img}
+                
               />
             </div>
             <div className="w-[600px]">

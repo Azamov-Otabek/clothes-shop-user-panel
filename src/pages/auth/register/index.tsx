@@ -17,9 +17,11 @@ const index: React.FC = () => {
   const { Option } = Select;
   const [isactive, setisactive] = useState(false)
   const [email, setemail]:[string, any] = useState('')
+  const [user, setUser] = useState({})
   
   const onFinish: FormProps<Register>['onFinish'] = async (values) => {
     setemail(values.email)
+    setUser(values)
     isload(true)
     const response = await Register(values)
     if(response.status == 200){
@@ -35,13 +37,13 @@ const index: React.FC = () => {
   
   
   return (
-    <>
+    <div className='mb-[100px]'>
     <NavLink to={'/'}>
         <Button className=' absolute left-[200px] top-[100px]'>
             Ortga qaytish
         </Button>
       </NavLink>
-    <ModalRegister active={isactive} setactive={setisactive} email={email} />
+    <ModalRegister active={isactive} setactive={setisactive} email={email} user={user} />
     <ToastContainer />
        <Container>
     <div className='max-w-[500px] mx-auto mt-[100px] border p-[40px] rounded-lg shadow-lg'>
@@ -116,7 +118,7 @@ const index: React.FC = () => {
        </div>
     </div>
  </Container>
-    </>
+    </div>
   )
 }
 

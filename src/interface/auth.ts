@@ -39,4 +39,5 @@ export interface Request{
     ResetPassword: (data:ResetPassword) => any,
     RefreshToken: (data:TokenRefresh) => any,
     VerifyCode: (data:VerifyCode) => any,
+    createUser: (data: Register) => any,
 }

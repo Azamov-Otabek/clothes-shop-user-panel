@@ -11,7 +11,7 @@ import { useState } from 'react';
 
 const App = (props:any) => {
   const { Title } = Typography;
-  const {VerifyCode} = useStore(Auth)
+  const {VerifyCode, createUser} = useStore(Auth)
   const navigate = useNavigate()
   const [inputDisabled, setInputDisabled] = useState(false);
 
@@ -30,6 +30,8 @@ const App = (props:any) => {
     }
     const response = await VerifyCode(payload)
     if(response.status == 200){
+      const response = await createUser(props.user)
+      console.log(response); 
       toast.success("Ro'yhatdan muvaffaqiyatli o'tildi", {autoClose: 900})
       setTimeout(() => {
         navigate('/login')

@@ -45,15 +45,13 @@ function Index() {
                   Категория
                 </Button>
                 <Search className="h-[40px]" placeholder="Напишите что вы искаете ?" enterButton="Search" size="large"/>
-                <NavLink to={'/login'}>
-                  {
-                      user != ''? (            
+                {
+                      user != '' ? (            
                         <Dropdown menu={{ items }} trigger={['click']}>        
                           <Space onClick={(e) => e.preventDefault()}>
                             <Button className="h-[40px] font-semibold text-[16px]" type="text" icon={<UserOutlined />} iconPosition={'start'}>
                               {user}
                             </Button>
-                           
                           </Space>
                         </Dropdown>
                       ) : (
@@ -64,10 +62,11 @@ function Index() {
                         </NavLink>
                       )
                   }
+                <NavLink to={'/likes' }>
+                  <Button className="h-[40px] font-semibold text-[16px]" type="text" icon={<HeartOutlined />} iconPosition={'start'}>
+                    Избранное
+                  </Button>
                 </NavLink>
-                <Button className="h-[40px] font-semibold text-[16px]" type="text" icon={<HeartOutlined />} iconPosition={'start'}>
-                  Избранное
-                </Button>
                 <Button className="h-[40px] font-semibold text-[16px]" type="text" icon={<ShoppingCartOutlined />} iconPosition={'start'}>
                   Корзина
                 </Button>
@@ -79,3 +78,4 @@ function Index() {
 }
 
 export default Index
+

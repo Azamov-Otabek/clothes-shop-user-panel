@@ -2,7 +2,7 @@ import axios from "axios";
 import { getCookies, setCookies } from '@cookie' 
 
 const http = axios.create({
-    baseURL: import.meta.env.VITE_BASE_URL
+    baseURL: "http://store.go-clothes.uz:5555/v1"
 })
 
 
@@ -12,7 +12,7 @@ async function getRefreshToken(){
         if(!refresh_tokenn){
             throw new Error('Refresh token not found')
         }
-        const response = await http.post(`http://store.go-clothes.uz:5555/v1/token/${refresh_tokenn}`)
+        const response = await http.get(`http://store.go-clothes.uz:5555/v1/token/${refresh_tokenn}`)
         const {access_token, refresh_token} = response.data
         setCookies('token', access_token)
         setCookies('refresh_token', refresh_token)

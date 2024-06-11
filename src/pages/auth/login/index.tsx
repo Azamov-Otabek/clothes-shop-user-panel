@@ -47,7 +47,7 @@ const index: React.FC = () => {
   
   
   return (
-    <>
+    <div className='mb-[100px]'>
       <NavLink to={'/'}>
         <Button className=' absolute left-[200px] top-[100px]'>
             Ortga qaytish
@@ -103,16 +103,8 @@ const index: React.FC = () => {
             <FacebookOutlined className='text-[30px] cursor-pointer text-[blue]'/>
        </div>
     </div>
- </Container>
- <GoogleLogin
-    onSuccess={credentialResponse => {
-    console.log(credentialResponse);
-  }}
-  onError={() => {
-    console.log('Login Failed');
-  }}
-/>;
-    </>
+  </Container>
+    </div>
   )
 }
 

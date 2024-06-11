@@ -1,9 +1,13 @@
 import { HeartOutlined, ShoppingCartOutlined } from "@ant-design/icons"
 import { getCard } from "../../../interface/products"
 import { Link } from "react-router-dom"
+import useLikesStore from "../../../store/likes"
+import { useStore } from "zustand"
+import {toast} from 'react-toastify'
 
 
 function index(props:getCard) {
+  const {Postlike} = useStore(useLikesStore)
   const {datas} = props
   let card = Number(datas?.description?.length)
   let desc = ''
@@ -11,8 +15,16 @@ function index(props:getCard) {
       desc = datas?.description?.slice(0, 30) + '...'
   }
 
-  function LikeCard(id:any){
-    console.log(id);
+  async function LikeCard(id:any){
+      const response = await Postlike({id})
+      if(response.status == 201){
+          if(response.data == true)
+            toast.success(`Saralanganlar ro'yhatiga qo'shildi!`, {autoClose: 2000})
+          else
+            toast.success(`Saralanganlar ro'yhatidan olib tashlandi`, {autoClose: 2000})
+      }else{
+        toast.error(`Saralanganlar ro'yhatiga qo'shish uchun, avval Ro'yhatdan o'ting !`, {autoClose: 2000})
+      }
   }
 
   function CartCard(id:any){
